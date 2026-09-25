@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- SheetJS for Excel Generation -->
+  <!-- SheetJS for Excel Export -->
   <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 
   <script>
@@ -49,8 +49,8 @@
 
   <style>
     .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
       background-color: #cbd5e1;
@@ -73,143 +73,136 @@
 <body class="bg-[#f0f3f6] text-gray-800 font-sans antialiased h-screen flex flex-col overflow-hidden select-none">
 
   <!-- TOP HEADER -->
-  <header class="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-between z-30 flex-shrink-0">
+  <header class="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between z-30 flex-shrink-0">
     <div class="flex items-center gap-3">
-      <!-- Google Ads Logo -->
+      <!-- Google Ads Brand -->
       <div class="flex items-center gap-2">
-        <svg class="w-6 h-6" viewBox="0 0 24 24">
+        <svg class="w-5 h-5" viewBox="0 0 24 24">
           <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
           <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
           <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
           <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
         </svg>
-        <span class="text-base font-google font-semibold text-gray-800 tracking-tight">Google Ads</span>
+        <span class="text-sm font-google font-semibold text-gray-800 tracking-tight">Google Ads</span>
       </div>
-
-      <!-- Studio Tag -->
-      <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-2 py-0.5 rounded-full border border-blue-200">
-        Performance Max Studio
-      </span>
 
       <div class="h-4 w-px bg-gray-300 hidden sm:block"></div>
 
-      <!-- Asset Group / Brand -->
+      <!-- Campaign Field -->
       <div class="hidden sm:flex items-center gap-1.5 text-xs text-gray-600">
-        <span class="text-gray-400">Asset Group:</span>
-        <input type="text" id="campaignNameInput" value="Air New Zealand" class="font-semibold text-gray-900 hover:bg-gray-100 px-1.5 py-0.5 rounded outline-none border border-transparent focus:border-blue-400 transition" oninput="handleScalarInput('businessName', 25)">
+        <span class="text-gray-400">Campaign:</span>
+        <input type="text" id="campaignNameInput" value="Performance Max Campaign" class="font-medium text-gray-800 hover:bg-gray-100 px-1.5 py-0.5 rounded outline-none border border-transparent focus:border-blue-400 transition" placeholder="Enter campaign name">
       </div>
     </div>
 
-    <!-- Quick Templates & Actions -->
+    <!-- Header Actions -->
     <div class="flex items-center gap-2">
-      <!-- Templates -->
-      <div class="hidden md:flex items-center gap-1 text-xs mr-2">
-        <span class="text-gray-400 text-[11px] mr-1">Load Template:</span>
-        <button onclick="applyPreset('clean')" class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-xs transition">Generic Clean</button>
-        <button onclick="applyPreset('saas')" class="px-2 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium rounded text-xs transition">SaaS Tech</button>
-        <button onclick="applyPreset('travel')" class="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium rounded text-xs transition">Ecommerce / Travel</button>
-        <button onclick="resetToEmpty()" class="px-2 py-1 text-red-600 hover:bg-red-50 rounded text-xs transition">Clear All</button>
-      </div>
+      <button onclick="resetToEmpty()" title="Reset all copy fields" class="flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition border border-gray-300 bg-white">
+        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-gray-500"></i>
+        <span>Clear Fields</span>
+      </button>
 
-      <!-- Primary Action Buttons -->
-      <button onclick="togglePresentationMode(true)" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-md transition shadow-xs">
+      <button onclick="togglePresentationMode(true)" class="flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded transition shadow-xs">
         <i data-lucide="monitor-play" class="w-3.5 h-3.5"></i>
         <span>Client Presentation Mode</span>
       </button>
 
-      <button onclick="openExportModal()" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 rounded-md transition shadow-xs">
-        <i data-lucide="share-2" class="w-3.5 h-3.5 text-gray-500"></i>
-        <span>Export / Sign-off</span>
+      <button onclick="copyClientPlaygroundLink()" class="flex items-center gap-1 px-3 py-1 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-300 hover:bg-blue-100 rounded transition shadow-xs">
+        <i data-lucide="share-2" class="w-3.5 h-3.5 text-blue-600"></i>
+        <span>Share Link with Client</span>
+      </button>
+
+      <button onclick="openExportModal()" class="flex items-center gap-1 px-3 py-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 rounded transition shadow-xs">
+        <i data-lucide="download" class="w-3.5 h-3.5 text-gray-500"></i>
+        <span class="hidden sm:inline">Export / Sign-off</span>
       </button>
     </div>
   </header>
 
-  <!-- WORKSPACE BODY (Split View) -->
+  <!-- WORKSPACE BODY -->
   <div class="flex-1 flex overflow-hidden relative w-full">
 
-    <!-- LEFT COLUMN: ASSET BUILDER -->
-    <div id="editorPanel" class="w-[480px] flex-shrink-0 bg-white border-r border-gray-200 flex flex-col h-full overflow-hidden transition-all duration-300">
+    <!-- LEFT COLUMN: ASSET INPUT BUILDER (Exact 410px width) -->
+    <div id="editorPanel" class="w-[410px] xl:w-[430px] flex-shrink-0 bg-white border-r border-gray-200 flex flex-col h-full overflow-hidden transition-all duration-300">
       
-      <!-- SUB-HEADER WITH AD STRENGTH -->
-      <div class="px-4 py-2.5 border-b border-gray-200 bg-white flex items-center justify-between flex-shrink-0">
+      <!-- Sub-header & Ad Strength Indicator -->
+      <div class="px-4 py-2 border-b border-gray-100 bg-white flex items-center justify-between flex-shrink-0">
         <div>
           <h2 class="text-xs font-bold text-gray-800 uppercase tracking-wide flex items-center gap-1.5">
             <span>Asset Builder</span>
             <span class="text-[10px] font-normal text-gray-400 capitalize">• PMax Official Spec</span>
           </h2>
-          <p class="text-[10px] text-gray-500">Enter copy & creatives to preview omnichannel ads</p>
+          <p class="text-[10px] text-gray-400">Enter copy & creatives to preview omnichannel ads</p>
         </div>
 
-        <!-- Ad Strength Card -->
-        <div class="flex items-center gap-2 bg-white px-2.5 py-1 rounded-lg border border-gray-200 shadow-2xs">
-          <div class="relative w-6 h-6 flex items-center justify-center">
-            <svg class="w-6 h-6 transform -rotate-90">
-              <circle cx="12" cy="12" r="9.5" stroke="#e5e7eb" stroke-width="2.5" fill="transparent"></circle>
-              <circle id="strengthCircle" cx="12" cy="12" r="9.5" stroke="#f9ab00" stroke-width="2.5" fill="transparent" stroke-dasharray="59.7" stroke-dashoffset="20"></circle>
+        <div class="flex items-center gap-2 bg-white px-2 py-0.5 rounded border border-gray-200">
+          <div class="relative w-5 h-5 flex items-center justify-center">
+            <svg class="w-5 h-5 transform -rotate-90">
+              <circle cx="10" cy="10" r="8" stroke="#e5e7eb" stroke-width="2" fill="transparent"></circle>
+              <circle id="strengthCircle" cx="10" cy="10" r="8" stroke="#f9ab00" stroke-width="2" fill="transparent" stroke-dasharray="50.2" stroke-dashoffset="18"></circle>
             </svg>
-            <i data-lucide="check" id="strengthIcon" class="w-3 h-3 text-yellow-600 absolute"></i>
+            <i data-lucide="check" id="strengthIcon" class="w-2.5 h-2.5 text-yellow-600 absolute"></i>
           </div>
           <div class="text-right">
-            <div class="text-[8px] text-gray-400 uppercase tracking-wider font-semibold">Ad Strength</div>
-            <div id="strengthText" class="text-xs font-bold text-yellow-600 leading-tight">Average</div>
+            <div class="text-[8px] text-gray-400 uppercase tracking-wider font-semibold leading-none">Strength</div>
+            <div id="strengthText" class="text-[11px] font-bold text-yellow-600 leading-tight">Average</div>
           </div>
         </div>
       </div>
 
-      <!-- FORM FIELDS -->
-      <div class="flex-1 overflow-y-auto p-4 space-y-3.5 custom-scrollbar text-xs select-text">
+      <!-- Scrollable Form Inputs -->
+      <div class="flex-1 overflow-y-auto p-3.5 space-y-3 custom-scrollbar text-xs select-text">
 
-        <!-- 1. CORE BUSINESS IDENTITY & URLS -->
-        <div class="bg-white rounded-xl p-3.5 border border-gray-200 space-y-3 shadow-2xs">
+        <!-- 1. Identity & URLs -->
+        <div class="bg-white rounded-lg p-3 border border-gray-200 space-y-2.5 shadow-2xs">
           <div class="pb-1 border-b border-gray-100">
-            <span class="font-bold uppercase tracking-wider text-[10px] flex items-center gap-1.5 text-blue-800">
+            <span class="font-bold text-gray-800 uppercase tracking-wider text-[10px] flex items-center gap-1.5 text-blue-800">
               <i data-lucide="globe" class="w-3.5 h-3.5 text-blue-600"></i> Core Business Identity & URLs
             </span>
           </div>
 
           <div>
-            <div class="flex justify-between items-center mb-1">
-              <label class="font-medium text-gray-700">Business Name <span class="text-red-500">*</span></label>
+            <div class="flex justify-between items-center mb-0.5">
+              <label class="font-medium text-gray-700 text-[11px]">Business Name <span class="text-red-500">*</span></label>
               <span id="counter-businessName" class="font-mono text-[10px] text-gray-400">15 / 25</span>
             </div>
             <input type="text" id="input-businessName" maxlength="25"
               value="Air New Zealand"
-              class="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 outline-none"
+              class="w-full px-2.5 py-1 text-xs bg-white border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 outline-none"
               oninput="handleScalarInput('businessName', 25)">
           </div>
 
           <div>
-            <div class="flex justify-between items-center mb-1">
-              <label class="font-medium text-gray-700">Final Landing Page URL <span class="text-red-500">*</span></label>
+            <div class="flex justify-between items-center mb-0.5">
+              <label class="font-medium text-gray-700 text-[11px]">Final Landing Page URL <span class="text-red-500">*</span></label>
             </div>
             <input type="url" id="input-finalUrl"
-              value="airnz.com"
-              class="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 outline-none"
+              value="https://www.airnewzealand.com"
+              class="w-full px-2.5 py-1 text-xs bg-white border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 outline-none"
               oninput="handleScalarInput('finalUrl', 200)">
           </div>
 
-          <!-- Display Path 1 & 2 -->
-          <div class="grid grid-cols-2 gap-2.5">
+          <div class="grid grid-cols-2 gap-2">
             <div>
-              <div class="flex justify-between items-center mb-1">
-                <label class="font-medium text-gray-700">Display Path 1</label>
+              <div class="flex justify-between items-center mb-0.5">
+                <label class="font-medium text-gray-700 text-[11px]">Display Path 1</label>
                 <span id="counter-path1" class="font-mono text-[10px] text-gray-400">4 / 15</span>
               </div>
               <div class="flex items-center border border-gray-300 rounded bg-white overflow-hidden">
                 <span class="px-2 text-gray-400 bg-gray-50 border-r border-gray-200">/</span>
-                <input type="text" id="input-path1" maxlength="15" value="test"
+                <input type="text" id="input-path1" maxlength="15" value="Special-Offer"
                   class="w-full px-2 py-1 text-xs border-0 outline-none"
                   oninput="handleScalarInput('path1', 15)">
               </div>
             </div>
             <div>
-              <div class="flex justify-between items-center mb-1">
-                <label class="font-medium text-gray-700">Display Path 2</label>
+              <div class="flex justify-between items-center mb-0.5">
+                <label class="font-medium text-gray-700 text-[11px]">Display Path 2</label>
                 <span id="counter-path2" class="font-mono text-[10px] text-gray-400">4 / 15</span>
               </div>
               <div class="flex items-center border border-gray-300 rounded bg-white overflow-hidden">
                 <span class="px-2 text-gray-400 bg-gray-50 border-r border-gray-200">/</span>
-                <input type="text" id="input-path2" maxlength="15" value="test"
+                <input type="text" id="input-path2" maxlength="15" value="Official"
                   class="w-full px-2 py-1 text-xs border-0 outline-none"
                   oninput="handleScalarInput('path2', 15)">
               </div>
@@ -217,8 +210,8 @@
           </div>
 
           <div>
-            <label class="font-medium text-gray-700 block mb-1">Call to Action (CTA)</label>
-            <select id="input-cta" class="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 outline-none" onchange="handleScalarInput('cta', 30)">
+            <label class="font-medium text-gray-700 block mb-0.5 text-[11px]">Call to Action (CTA)</label>
+            <select id="input-cta" class="w-full px-2.5 py-1 text-xs bg-white border border-gray-300 rounded outline-none" onchange="handleScalarInput('cta', 30)">
               <option value="Book now" selected>Book now</option>
               <option value="Learn more">Learn more</option>
               <option value="Shop now">Shop now</option>
@@ -230,14 +223,132 @@
           </div>
         </div>
 
-        <!-- 2. HEADLINES -->
-        <div class="bg-white rounded-xl p-3.5 border border-gray-200 space-y-2.5 shadow-2xs">
+        <!-- 2. Creative Media Assets (Images, Logo, Video) -->
+        <div class="bg-white rounded-lg p-3 border border-gray-200 space-y-2.5 shadow-2xs">
+          <div class="pb-1 border-b border-gray-100">
+            <span class="font-bold text-gray-800 uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+              <i data-lucide="image" class="w-3.5 h-3.5 text-blue-600"></i> Visual Media Assets
+            </span>
+          </div>
+
+          <div>
+            <label class="font-medium text-gray-700 block mb-0.5 text-[11px]">Marketing Hero Landscape (1200 x 628)</label>
+            <div class="flex gap-1.5">
+              <input type="text" id="input-heroImage"
+                class="flex-1 px-2.5 py-1 text-xs bg-white border border-gray-300 rounded outline-none"
+                oninput="handleScalarInput('heroImage', 300)">
+              <label class="px-2 py-1 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded cursor-pointer font-medium text-gray-700 flex items-center gap-1 flex-shrink-0 text-[11px]">
+                <i data-lucide="upload" class="w-3 h-3"></i> Upload
+                <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event, 'heroImage')">
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="font-medium text-gray-700 block mb-0.5 text-[11px]">Brand Square Logo (1:1)</label>
+            <div class="flex gap-1.5 items-center">
+              <div class="w-6 h-6 rounded border border-gray-300 bg-white p-0.5 flex items-center justify-center overflow-hidden flex-shrink-0">
+                <img id="formLogoThumb" src="" class="w-full h-full object-contain" alt="Logo">
+              </div>
+              <input type="text" id="input-logoImage"
+                class="flex-1 px-2.5 py-1 text-xs bg-white border border-gray-300 rounded outline-none"
+                oninput="handleScalarInput('logoImage', 300)">
+              <label class="px-2 py-1 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded cursor-pointer font-medium text-gray-700 flex items-center gap-1 flex-shrink-0 text-[11px]">
+                <i data-lucide="upload" class="w-3 h-3"></i> Upload
+                <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event, 'logoImage')">
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="font-medium text-gray-700 block mb-0.5 text-[11px]">YouTube Video Asset (Preview Thumbnail)</label>
+            <input type="text" id="input-videoThumbnail"
+              class="w-full px-2.5 py-1 text-xs bg-white border border-gray-300 rounded outline-none"
+              oninput="handleScalarInput('videoThumbnail', 300)">
+          </div>
+        </div>
+
+        <!-- 3. Sitelinks Extensions (Matching exact highlighted card layout) -->
+        <div class="bg-white rounded-lg p-3 border border-gray-200 space-y-2.5 shadow-2xs">
+          <div class="flex items-center justify-between pb-1 border-b border-gray-100">
+            <div>
+              <span class="font-bold text-gray-800 uppercase tracking-wider text-[10px] flex items-center gap-1">
+                <i data-lucide="link-2" class="w-3.5 h-3.5 text-blue-600"></i> Sitelinks Extensions (Up to 4)
+              </span>
+              <p class="text-[9px] text-gray-400">Pick 1-click industry packs or tap chips below without manual typing</p>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <label class="flex items-center gap-1 text-[10px] font-medium text-gray-700 cursor-pointer select-none bg-gray-50 px-1.5 py-0.5 rounded border border-gray-200">
+                <input type="checkbox" id="toggle-sitelinks-active" checked onchange="toggleSitelinksActive(this.checked)" class="rounded text-blue-600 w-3 h-3">
+                <span>Show in Ad</span>
+              </label>
+              <button onclick="addSitelink()" class="text-[11px] font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-0.5">
+                <i data-lucide="plus" class="w-3 h-3"></i> Add
+              </button>
+            </div>
+          </div>
+
+          <!-- 1-Click Sitelink Preset Packs (The 4 Clean Boxes) -->
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[9px] font-bold uppercase tracking-wider text-gray-500 flex items-center gap-1">
+                <i data-lucide="zap" class="w-2.5 h-2.5 text-amber-500"></i> 1-Click Complete Sitelink Packs
+              </span>
+              <button type="button" onclick="autoGenerateSitelinks()" class="text-[10px] font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-0.5">
+                <i data-lucide="sparkles" class="w-2.5 h-2.5 text-indigo-500"></i> Auto-Match Brand
+              </button>
+            </div>
+
+            <!-- 4 Equal Column Grid for Packs -->
+            <div class="grid grid-cols-4 gap-1.5">
+              <button type="button" onclick="applySitelinkPack('ecommerce')" class="p-1.5 bg-white hover:bg-blue-50 hover:border-blue-300 border border-gray-200 rounded text-left transition group">
+                <div class="font-semibold text-gray-800 text-[10px] group-hover:text-blue-600 truncate">🛒 E-Commerce</div>
+                <div class="text-[8px] text-gray-400 leading-tight mt-0.5 truncate">Best Sellers, Deals, Reviews</div>
+              </button>
+
+              <button type="button" onclick="applySitelinkPack('leadgen')" class="p-1.5 bg-white hover:bg-blue-50 hover:border-blue-300 border border-gray-200 rounded text-left transition group">
+                <div class="font-semibold text-gray-800 text-[10px] group-hover:text-blue-600 truncate">💼 B2B / Lead Gen</div>
+                <div class="text-[8px] text-gray-400 leading-tight mt-0.5 truncate">Free Quote, Services, Cases</div>
+              </button>
+
+              <button type="button" onclick="applySitelinkPack('booking')" class="p-1.5 bg-white hover:bg-blue-50 hover:border-blue-300 border border-gray-200 rounded text-left transition group">
+                <div class="font-semibold text-gray-800 text-[10px] group-hover:text-blue-600 truncate">📅 Booking / Local</div>
+                <div class="text-[8px] text-gray-400 leading-tight mt-0.5 truncate">Book Now, Location, Hours</div>
+              </button>
+
+              <button type="button" onclick="applySitelinkPack('saas')" class="p-1.5 bg-white hover:bg-blue-50 hover:border-blue-300 border border-gray-200 rounded text-left transition group">
+                <div class="font-semibold text-gray-800 text-[10px] group-hover:text-blue-600 truncate">⚡ SaaS / Software</div>
+                <div class="text-[8px] text-gray-400 leading-tight mt-0.5 truncate">Free Trial, Pricing, Demo</div>
+              </button>
+            </div>
+
+            <!-- Quick Tap Chips -->
+            <div class="pt-1">
+              <div class="text-[9px] text-gray-400 mb-1">Quick-tap to add individual pre-filled extensions:</div>
+              <div class="flex flex-wrap gap-1">
+                <button type="button" onclick="quickInsertSitelink('Reviews', 'Over 10,000+ ratings', 'Rated 4.9 stars')" class="px-1.5 py-0.5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded text-[9px] text-gray-600">⭐ Reviews</button>
+                <button type="button" onclick="quickInsertSitelink('Pricing', 'Transparent monthly tiers', 'No hidden fees')" class="px-1.5 py-0.5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded text-[9px] text-gray-600">🏷️ Pricing</button>
+                <button type="button" onclick="quickInsertSitelink('Special Offers', 'Save up to 30% off', 'Limited time promotion')" class="px-1.5 py-0.5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded text-[9px] text-gray-600">% Special Offers</button>
+                <button type="button" onclick="quickInsertSitelink('Book Consultation', 'Speak with specialists', 'Free 15-min call')" class="px-1.5 py-0.5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded text-[9px] text-gray-600">📅 Book Consultation</button>
+                <button type="button" onclick="quickInsertSitelink('Free Trial', '14 days full access', 'No credit card')" class="px-1.5 py-0.5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded text-[9px] text-gray-600">▶ Free Trial</button>
+                <button type="button" onclick="quickInsertSitelink('Contact Us', 'Dedicated customer care', 'Fast responses')" class="px-1.5 py-0.5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded text-[9px] text-gray-600">📞 Contact Us</button>
+                <button type="button" onclick="quickInsertSitelink('Locations', 'Find nearest branch', 'Open 7 days')" class="px-1.5 py-0.5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded text-[9px] text-gray-600">📍 Locations</button>
+                <button type="button" onclick="quickInsertSitelink('FAQs', 'Instant answers', 'Browse help center')" class="px-1.5 py-0.5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded text-[9px] text-gray-600">❓ FAQs</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sitelinks List Injected -->
+          <div id="sitelinksContainer" class="space-y-1.5 pt-1 border-t border-gray-100"></div>
+        </div>
+
+        <!-- 4. Headlines -->
+        <div class="bg-white rounded-lg p-3 border border-gray-200 space-y-2 shadow-2xs">
           <div class="flex items-center justify-between pb-1 border-b border-gray-100">
             <div>
               <span class="font-bold text-gray-800 uppercase tracking-wider text-[10px] flex items-center gap-1.5">
                 <i data-lucide="type" class="w-3.5 h-3.5 text-blue-600"></i> Headlines (Up to 30 Chars)
               </span>
-              <p class="text-[9px] text-gray-400">Google rotates up to 3 headlines dynamically in Search & Display</p>
             </div>
             <button onclick="addHeadline()" class="text-[11px] font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-0.5">
               <i data-lucide="plus" class="w-3 h-3"></i> Add (Max 15)
@@ -246,14 +357,13 @@
           <div id="headlinesContainer" class="space-y-1.5"></div>
         </div>
 
-        <!-- 3. LONG HEADLINES -->
-        <div class="bg-white rounded-xl p-3.5 border border-gray-200 space-y-2.5 shadow-2xs">
+        <!-- 5. Long Headlines -->
+        <div class="bg-white rounded-lg p-3 border border-gray-200 space-y-2 shadow-2xs">
           <div class="flex items-center justify-between pb-1 border-b border-gray-100">
             <div>
               <span class="font-bold text-gray-800 uppercase tracking-wider text-[10px] flex items-center gap-1.5">
                 <i data-lucide="align-left" class="w-3.5 h-3.5 text-blue-600"></i> Long Headlines (Up to 90 Chars)
               </span>
-              <p class="text-[9px] text-gray-400">Appears on larger YouTube, Discover & Display banner slots</p>
             </div>
             <button onclick="addLongHeadline()" class="text-[11px] font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-0.5">
               <i data-lucide="plus" class="w-3 h-3"></i> Add (Max 5)
@@ -262,8 +372,8 @@
           <div id="longHeadlinesContainer" class="space-y-1.5"></div>
         </div>
 
-        <!-- 4. DESCRIPTIONS -->
-        <div class="bg-white rounded-xl p-3.5 border border-gray-200 space-y-2.5 shadow-2xs">
+        <!-- 6. Descriptions -->
+        <div class="bg-white rounded-lg p-3 border border-gray-200 space-y-2 shadow-2xs">
           <div class="flex items-center justify-between pb-1 border-b border-gray-100">
             <div>
               <span class="font-bold text-gray-800 uppercase tracking-wider text-[10px] flex items-center gap-1.5">
@@ -277,87 +387,34 @@
 
           <div class="p-2 bg-gray-50/70 rounded border border-gray-200">
             <div class="flex justify-between items-center mb-0.5">
-              <span class="font-medium text-gray-700">Short Description (Max 60)</span>
-              <span id="counter-shortDesc" class="font-mono text-[10px] text-gray-400">0 / 60</span>
+              <span class="font-medium text-gray-700 text-[10px]">Short Description (Max 60)</span>
+              <span id="counter-shortDesc" class="font-mono text-[9px] text-gray-400">0 / 60</span>
             </div>
             <input type="text" id="input-shortDesc" maxlength="60"
               placeholder="e.g. Elevate your everyday routine."
-              class="w-full px-2 py-1 text-xs bg-white border border-gray-300 rounded outline-none"
+              class="w-full px-2 py-0.5 text-xs bg-white border border-gray-300 rounded outline-none"
               oninput="handleScalarInput('shortDesc', 60)">
           </div>
 
           <div id="descriptionsContainer" class="space-y-1.5"></div>
         </div>
 
-        <!-- 5. VISUAL ASSETS -->
-        <div class="bg-white rounded-xl p-3.5 border border-gray-200 space-y-3 shadow-2xs">
-          <div class="pb-1 border-b border-gray-100">
-            <span class="font-bold text-gray-800 uppercase tracking-wider text-[10px] flex items-center gap-1.5">
-              <i data-lucide="image" class="w-3.5 h-3.5 text-blue-600"></i> Visual Media Assets
-            </span>
-          </div>
-
-          <div>
-            <label class="font-medium text-gray-700 block mb-1">Marketing Hero Landscape (1200 x 628)</label>
-            <div class="flex gap-2">
-              <input type="text" id="input-heroImage" placeholder="https://image-url..."
-                class="flex-1 px-2.5 py-1 text-xs bg-white border border-gray-300 rounded outline-none"
-                oninput="handleScalarInput('heroImage', 300)">
-              <label class="px-2 py-1 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded cursor-pointer font-medium text-gray-700 flex items-center gap-1 flex-shrink-0">
-                <i data-lucide="upload" class="w-3 h-3"></i>
-                <span>Upload</span>
-                <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event, 'heroImage')">
-              </label>
-            </div>
-          </div>
-
-          <div>
-            <label class="font-medium text-gray-700 block mb-1">Brand Square Logo (1:1)</label>
-            <div class="flex gap-2 items-center">
-              <div class="w-7 h-7 rounded border border-gray-300 bg-white p-0.5 flex items-center justify-center overflow-hidden flex-shrink-0">
-                <img id="formLogoThumb" src="" class="w-full h-full object-contain" alt="Logo">
-              </div>
-              <input type="text" id="input-logoImage" placeholder="https://logo-url..."
-                class="flex-1 px-2.5 py-1 text-xs bg-white border border-gray-300 rounded outline-none"
-                oninput="handleScalarInput('logoImage', 300)">
-              <label class="px-2 py-1 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded cursor-pointer font-medium text-gray-700 flex items-center gap-1 flex-shrink-0">
-                <i data-lucide="upload" class="w-3 h-3"></i>
-                <span>Upload</span>
-                <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event, 'logoImage')">
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. SITELINKS -->
-        <div class="bg-white rounded-xl p-3.5 border border-gray-200 space-y-2.5 shadow-2xs">
-          <div class="flex items-center justify-between pb-1 border-b border-gray-100">
-            <span class="font-bold text-gray-800 uppercase tracking-wider text-[10px] flex items-center gap-1.5">
-              <i data-lucide="link-2" class="w-3.5 h-3.5 text-blue-600"></i> Sitelinks Extensions (Max 4)
-            </span>
-            <button onclick="addSitelink()" class="text-[11px] font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-0.5">
-              <i data-lucide="plus" class="w-3 h-3"></i> Add
-            </button>
-          </div>
-          <div id="sitelinksContainer" class="space-y-1.5"></div>
-        </div>
-
       </div>
     </div>
 
-    <!-- RIGHT COLUMN: PREVIEW SESSION -->
+    <!-- RIGHT COLUMN: PREVIEW SESSION (Clean & Proportional Spacing) -->
     <div id="previewSessionPanel" class="flex-1 bg-[#f0f3f6] flex flex-col h-full overflow-hidden transition-all duration-300">
       
-      <!-- COMPACT HEADER BAR -->
+      <!-- Preview Navigation Bar -->
       <div class="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between flex-shrink-0 shadow-2xs">
         
-        <!-- Channels -->
+        <!-- Channels (Exactly matching screenshot) -->
         <div class="flex items-center space-x-1" id="channelTabNav">
-          <button onclick="switchChannel('search')" id="tab-search" class="channel-tab-btn flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+          <button onclick="switchChannel('search')" id="tab-search" class="channel-tab-btn flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium text-gray-600 hover:bg-gray-100">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24"><path fill="#4285F4" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-1 14.5v-9l6 4.5z"/></svg>
             <span>Search</span>
           </button>
-          <button onclick="switchChannel('display')" id="tab-display" class="channel-tab-btn flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium text-gray-600 hover:bg-gray-100">
+          <button onclick="switchChannel('display')" id="tab-display" class="channel-tab-btn flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
             <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-green-600"></i>
             <span>Display</span>
           </button>
@@ -373,9 +430,13 @@
             <i data-lucide="mail" class="w-3.5 h-3.5 text-red-500"></i>
             <span>Gmail</span>
           </button>
+          <button onclick="switchChannel('all')" id="tab-all" class="channel-tab-btn flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium text-gray-600 hover:bg-gray-100">
+            <i data-lucide="layers" class="w-3.5 h-3.5 text-indigo-600"></i>
+            <span>All Channels View</span>
+          </button>
         </div>
 
-        <!-- Action tools -->
+        <!-- Controls: Shuffle + Device Toggle + Fullscreen -->
         <div class="flex items-center gap-2">
           <button onclick="shuffleMachineLearningCopy()" title="Simulate dynamic rotation"
             class="flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 transition shadow-2xs">
@@ -400,28 +461,81 @@
         </div>
       </div>
 
-      <!-- Viewport Container -->
-      <div class="flex-1 overflow-y-auto p-6 flex justify-start items-start custom-scrollbar" id="previewViewport">
+      <!-- Viewport Canvas (Prettier Spacing) -->
+      <div class="flex-1 overflow-y-auto p-6 md:p-8 flex justify-center items-start custom-scrollbar" id="previewViewport">
         <div id="previewCanvasWrapper" class="w-full max-w-lg transition-all duration-300">
           
-          <!-- SEARCH SERP CARD -->
-          <div id="channel-view-search" class="space-y-3">
+          <!-- 1. DISPLAY VIEW (Matches screenshot exactly: Feed Card + 300x250 below) -->
+          <div id="channel-view-display" class="space-y-6">
+            <div class="text-xs font-medium text-gray-500 flex items-center justify-between px-1">
+              <span class="flex items-center gap-1.5"><i data-lucide="layout-grid" class="w-3.5 h-3.5 text-green-500"></i> Google Display Network (GDN) Responsive Formats</span>
+              <span class="text-[11px] text-gray-400">3M+ Publisher Sites & Apps</span>
+            </div>
+
+            <!-- Native Responsive Feed Card -->
+            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+              <div class="px-3 py-1.5 bg-gray-50/70 border-b border-gray-100 flex justify-between items-center text-[10px] text-gray-500">
+                <span>Native Responsive Feed Card</span>
+                <span class="bg-gray-200 text-gray-700 px-1 rounded text-[9px]">Ad</span>
+              </div>
+              <div class="p-3.5">
+                <div class="relative rounded-lg overflow-hidden bg-gray-900 aspect-[16/9] mb-3">
+                  <img id="displayHeroImg1" src="" class="w-full h-full object-cover" alt="Hero">
+                  <div class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded backdrop-blur-xs">
+                    Sponsored by <span id="displayBadgeBrand">Air New Zealand</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex-1 min-w-0">
+                    <h4 id="displayNativeTitle" class="text-sm font-semibold text-gray-900 truncate">Top Rated Solutions</h4>
+                  </div>
+                  <button id="displayNativeCta" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded shadow-xs whitespace-nowrap">
+                    Learn more
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Standard Rectangle (300 x 250) Centered -->
+            <div class="flex flex-col items-center pt-2">
+              <div class="text-[10px] text-gray-400 mb-1.5">Standard Rectangle (300 x 250)</div>
+              <div class="w-[300px] h-[250px] bg-white border border-gray-300 rounded-lg shadow-sm relative flex flex-col justify-between p-3 overflow-hidden">
+                <div class="absolute top-1.5 right-1.5 flex items-center gap-0.5 bg-white/90 px-1 rounded text-[9px] text-gray-400">
+                  <span>Ad</span>
+                  <i data-lucide="info" class="w-2.5 h-2.5"></i>
+                </div>
+                <div class="h-[125px] rounded overflow-hidden mb-2">
+                  <img id="displayMpuImg" src="" class="w-full h-full object-cover" alt="Display visual">
+                </div>
+                <div class="flex-1 flex flex-col justify-between">
+                  <div>
+                    <h5 id="displayMpuTitle" class="text-xs font-bold text-gray-900 line-clamp-1">Top Rated Solutions</h5>
+                  </div>
+                  <div class="flex items-center justify-between pt-1">
+                    <span id="displayMpuBrand" class="text-[10px] text-gray-400 font-medium">Your Brand</span>
+                    <span id="displayMpuCta" class="px-3 py-1 bg-blue-600 text-white text-[11px] font-medium rounded">Learn more</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. SEARCH VIEW -->
+          <div id="channel-view-search" class="hidden space-y-3">
             <div class="text-xs font-medium text-gray-500 flex items-center justify-between px-1">
               <span class="flex items-center gap-1.5"><i data-lucide="search" class="w-3.5 h-3.5 text-blue-500"></i> Google Search SERP Placement</span>
               <span class="text-[11px] text-gray-400">Sponsored Ad #1</span>
             </div>
 
             <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm font-sans">
-              <!-- Query bar -->
               <div class="flex items-center gap-2 pb-2.5 mb-2.5 border-b border-gray-100 text-xs text-gray-600">
                 <span class="font-google font-bold text-base text-gray-800 tracking-tight">Google</span>
-                <div class="flex-1 bg-gray-100 rounded-full px-3 py-1.5 text-xs text-gray-600 truncate flex items-center justify-between">
+                <div class="flex-1 bg-gray-100 rounded-full px-3 py-1 text-xs text-gray-600 truncate flex items-center justify-between">
                   <span id="searchMockQuery">air new zealand solutions online</span>
                   <i data-lucide="search" class="w-3 h-3 text-gray-400"></i>
                 </div>
               </div>
 
-              <!-- Brand Header -->
               <div class="mb-2">
                 <div class="flex items-center justify-between">
                   <div class="flex items-center gap-2 min-w-0">
@@ -436,80 +550,66 @@
                   <i data-lucide="more-vertical" class="w-3.5 h-3.5 text-gray-400 cursor-pointer"></i>
                 </div>
                 <div class="text-[12px] text-[#202124] leading-tight truncate mt-0.5" id="serpBreadcrumbWrap">
-                  <span id="serpDomain" class="text-gray-800">https://airnz.com</span>
-                  <span id="serpPathBreadcrumb" class="text-gray-500 font-normal"> › test › test</span>
+                  <span id="serpDomain" class="text-gray-800">https://www.airnewzealand.com</span>
+                  <span id="serpPathBreadcrumb" class="text-gray-500 font-normal"> › Special-Offer › Official</span>
                 </div>
               </div>
 
-              <!-- Headlines -->
               <h3 class="text-lg leading-snug font-roboto text-[#1a0dab] hover:underline cursor-pointer mb-1.5 font-normal serp-link" id="serpHeadline">
-                Top Rated Brand Solution | Official Site | Shop Online Today
+                Top Rated Solutions | Official Brand Site | Save Today
               </h3>
 
-              <!-- Description -->
               <p class="text-xs text-[#4d5156] leading-relaxed mb-3" id="serpDescription">
                 Discover exceptional quality and performance built for your lifestyle. Explore full range and unlock free shipping today.
               </p>
 
-              <!-- Sitelinks -->
-              <div id="serpSitelinksContainer" class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-100">
-                <div class="p-2 bg-gray-50 rounded border border-gray-100">
-                  <div class="text-xs font-medium text-[#1a0dab] hover:underline">Special Deals</div>
-                  <div class="text-[10px] text-gray-500">Save up to 30% today</div>
-                </div>
-                <div class="p-2 bg-gray-50 rounded border border-gray-100">
-                  <div class="text-xs font-medium text-[#1a0dab] hover:underline">Customer Reviews</div>
-                  <div class="text-[10px] text-gray-500">Rated 4.9 by users</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Notice -->
-            <div class="bg-blue-50/70 rounded-lg p-2.5 text-xs text-blue-800 border border-blue-100 flex items-start gap-2">
-              <i data-lucide="sparkles" class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5"></i>
-              <span>Google automatically pairs high-performing headlines and descriptions dynamically based on real-time user query intent.</span>
+              <div id="serpSitelinksContainer" class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-100"></div>
             </div>
           </div>
 
-          <!-- DISPLAY -->
-          <div id="channel-view-display" class="hidden space-y-4">
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden p-3">
-              <img id="displayHeroImg1" src="" class="w-full aspect-video object-cover rounded mb-2" alt="Hero">
-              <h4 id="displayNativeTitle" class="text-sm font-semibold text-gray-900 mb-1">Empowering Your Daily Routine</h4>
-              <p id="displayNativeDesc" class="text-xs text-gray-600 mb-2">Unmatched comfort and performance designed for travel.</p>
-              <button id="displayNativeCta" class="px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded">Book now</button>
-            </div>
-          </div>
-
-          <!-- YOUTUBE -->
+          <!-- 3. YOUTUBE VIEW -->
           <div id="channel-view-youtube" class="hidden space-y-4">
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
               <div class="relative bg-black aspect-video">
                 <img id="ytVideoThumb" src="" class="w-full h-full object-cover opacity-85" alt="Video">
               </div>
-              <div class="p-3">
+              <div class="p-3.5">
                 <h3 id="ytMainTitle" class="text-sm font-semibold text-gray-900 mb-2">Discover Seamless Journeys with Air New Zealand</h3>
                 <button id="ytBottomCta" class="w-full py-2 bg-blue-600 text-white text-xs font-semibold rounded-full">Book now</button>
               </div>
             </div>
           </div>
 
-          <!-- DISCOVER -->
+          <!-- 4. DISCOVER VIEW -->
           <div id="channel-view-discover" class="hidden space-y-4">
-            <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 p-4">
+            <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 p-4 shadow-sm">
               <img id="discoverHeroImg" src="" class="w-full aspect-[1.91/1] object-cover rounded mb-2" alt="Discover">
               <h3 id="discoverTitle" class="text-sm font-semibold text-gray-900 mb-1">Fly Better Across the Globe</h3>
               <p id="discoverDesc" class="text-xs text-gray-600">Experience world-class hospitality and flexible fares.</p>
             </div>
           </div>
 
-          <!-- GMAIL -->
+          <!-- 5. GMAIL VIEW -->
           <div id="channel-view-gmail" class="hidden space-y-4">
-            <div class="bg-white rounded-xl border border-gray-200 p-3 flex items-center gap-2.5">
+            <div class="bg-white rounded-xl border border-gray-200 p-3 flex items-center gap-2.5 shadow-sm">
               <img id="gmailTeaserLogo" src="" class="w-7 h-7 rounded-full object-cover border" alt="Logo">
               <div class="min-w-0 flex-1">
                 <div class="text-xs font-bold text-gray-900">Air New Zealand</div>
                 <div class="text-xs text-gray-800 font-medium truncate" id="gmailTeaserSubject">Exclusive Flight Specials</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. ALL VIEW -->
+          <div id="channel-view-all" class="hidden space-y-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="bg-white p-3 rounded-lg border border-gray-200 shadow-2xs">
+                <div class="text-[10px] font-bold text-blue-600 mb-1">Google Search</div>
+                <div class="text-xs text-blue-800 font-medium truncate" id="allSearchHead">Air New Zealand Official</div>
+              </div>
+              <div class="bg-white p-3 rounded-lg border border-gray-200 shadow-2xs">
+                <div class="text-[10px] font-bold text-green-600 mb-1">Display Network</div>
+                <div class="text-xs font-semibold text-gray-800 truncate" id="allDisplayHead">Top Rated Solutions</div>
               </div>
             </div>
           </div>
@@ -543,77 +643,75 @@
 
   <!-- JAVASCRIPT STATE LOGIC -->
   <script>
-    const presets = {
-      clean: {
-        businessName: "Your Brand",
-        finalUrl: "yourbrand.com",
-        path1: "Offer",
-        path2: "Official",
-        cta: "Learn more",
-        headlines: ["Elevate Your Routine", "Top Rated Solutions", "Built For Modern Life"],
-        longHeadlines: ["Discover personalized, high-performance solutions tailored specifically for your lifestyle"],
-        shortDesc: "Elevate your everyday experience with verified expert solutions.",
-        descriptions: ["Experience exceptional reliability, innovative design, and proven quality backed by experts."],
-        heroImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
-        logoImage: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?auto=format&fit=crop&w=150&q=80",
-        sitelinks: [
-          { text: "Special Deals", desc1: "Save up to 30% today" },
-          { text: "Customer Reviews", desc1: "Rated 4.9 by users" }
-        ]
-      },
-      saas: {
-        businessName: "CloudScale AI",
-        finalUrl: "cloudscale.io",
-        path1: "Trial",
-        path2: "Start",
-        cta: "Sign up",
-        headlines: ["Next-Gen Cloud Automation", "Scale 10x Faster", "Enterprise Security"],
-        longHeadlines: ["Modernize your cloud infrastructure with automated AI workloads and real-time insights"],
-        shortDesc: "All-in-one developer cloud platform with zero maintenance overhead.",
-        descriptions: ["Join over 5,000 engineering teams who deployed faster and reduced infrastructure spend."],
-        heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
-        logoImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&q=80",
-        sitelinks: [
-          { text: "Free 14-Day Trial", desc1: "No credit card needed" },
-          { text: "Pricing & Plans", desc1: "Transparent scalable tiers" }
-        ]
-      },
-      travel: {
-        businessName: "Air New Zealand",
-        finalUrl: "airnz.com",
-        path1: "test",
-        path2: "test",
-        cta: "Book now",
-        headlines: ["Top Rated Brand Solution", "Official Site", "Shop Online Today"],
-        longHeadlines: ["Discover flexible fares, award-winning service, and convenient flights across New Zealand"],
-        shortDesc: "Experience seamless travel with award-winning Kiwi hospitality.",
-        descriptions: ["Book direct with Air New Zealand for exclusive fare deals, flexible tickets, and seamless bookings."],
-        heroImage: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80",
-        logoImage: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=150&q=80",
-        sitelinks: [
-          { text: "Special Deals", desc1: "Save up to 30% today" },
-          { text: "Customer Reviews", desc1: "Rated 4.9 by users" }
-        ]
-      }
+    const sitelinkPacks = {
+      ecommerce: [
+        { text: "Shop Best Sellers", desc1: "Top rated favorites", desc2: "Free shipping available" },
+        { text: "Special Deals", desc1: "Save up to 40% today", desc2: "Limited-time flash sale" },
+        { text: "Customer Reviews", desc1: "Over 15,000+ ratings", desc2: "Verified feedback" },
+        { text: "Track Order", desc1: "Live delivery updates", desc2: "Hassle-free returns" }
+      ],
+      leadgen: [
+        { text: "Get a Free Quote", desc1: "Tailored to your needs", desc2: "Fast 24-hr turnaround" },
+        { text: "Our Services", desc1: "Enterprise level plans", desc2: "Certified expertise" },
+        { text: "Case Studies", desc1: "Verified client results", desc2: "Proven ROI growth" },
+        { text: "Contact Experts", desc1: "Speak with an advisor", desc2: "Free consultation" }
+      ],
+      booking: [
+        { text: "Book Online Now", desc1: "Instant confirmation", desc2: "Choose date & time" },
+        { text: "Locations & Hours", desc1: "Find nearest branch", desc2: "Open 7 days a week" },
+        { text: "Pricing & Plans", desc1: "Transparent rates", desc2: "No hidden fees" },
+        { text: "Meet Our Team", desc1: "Certified specialists", desc2: "Trusted experience" }
+      ],
+      saas: [
+        { text: "Start Free Trial", desc1: "14 days full access", desc2: "No card required" },
+        { text: "Transparent Pricing", desc1: "Scale with your team", desc2: "Monthly or annual" },
+        { text: "Product Features", desc1: "Explore full toolkit", desc2: "Integrates with 100+ tools" },
+        { text: "Schedule a Demo", desc1: "Live walkthrough", desc2: "Tailored to workflow" }
+      ]
     };
 
-    let state = JSON.parse(JSON.stringify(presets.travel));
-    state.activeChannel = 'search';
-    state.device = 'mobile';
-    state.isPresentationMode = false;
-    state.headlineRotationIndex = 0;
+    let state = {
+      businessName: "Air New Zealand",
+      finalUrl: "https://www.airnewzealand.com",
+      path1: "Special-Offer",
+      path2: "Official",
+      cta: "Learn more",
+      headlines: [
+        "Top Rated Solutions",
+        "Official Brand Store Online",
+        "Elevate Your Daily Routine"
+      ],
+      longHeadlines: [
+        "Discover personalized, high-performance solutions tailored specifically for your lifestyle"
+      ],
+      shortDesc: "Elevate your everyday experience with verified expert solutions.",
+      descriptions: [
+        "Experience exceptional reliability, innovative design, and proven quality backed by experts.",
+        "Join over 50,000 satisfied customers who upgraded their routine with our guaranteed products."
+      ],
+      heroImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+      logoImage: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?auto=format&fit=crop&w=150&q=80",
+      videoThumbnail: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
+      sitelinks: [
+        { text: "Customer Reviews", desc1: "Over 10,000+ ratings", desc2: "Rated 4.9 stars" },
+        { text: "Special Deals", desc1: "Save up to 30% today", desc2: "Limited time pricing" }
+      ],
+      sitelinksEnabled: true,
+      activeChannel: 'display', // Set default to display as shown in the screenshot
+      device: 'mobile',
+      isPresentationMode: false
+    };
 
     function populateForm() {
       document.getElementById('input-businessName').value = state.businessName || "";
-      const campaignNameInput = document.getElementById('campaignNameInput');
-      if (campaignNameInput) campaignNameInput.value = state.businessName || "";
       document.getElementById('input-finalUrl').value = state.finalUrl || "";
       document.getElementById('input-path1').value = state.path1 || "";
       document.getElementById('input-path2').value = state.path2 || "";
-      document.getElementById('input-cta').value = state.cta || "Book now";
+      document.getElementById('input-cta').value = state.cta || "Learn more";
       document.getElementById('input-shortDesc').value = state.shortDesc || "";
       document.getElementById('input-heroImage').value = state.heroImage || "";
       document.getElementById('input-logoImage').value = state.logoImage || "";
+      document.getElementById('input-videoThumbnail').value = state.videoThumbnail || "";
 
       updateCounter('businessName', (state.businessName || "").length, 25);
       updateCounter('path1', (state.path1 || "").length, 15);
@@ -628,23 +726,10 @@
       updateAllAdPreviews();
     }
 
-    function applyPreset(name) {
-      if (presets[name]) {
-        state = Object.assign(state, JSON.parse(JSON.stringify(presets[name])));
-        populateForm();
-      }
-    }
-
     function handleScalarInput(field, maxLen) {
       const el = document.getElementById(`input-${field}`);
-      const val = el ? el.value : (field === 'businessName' ? document.getElementById('campaignNameInput').value : '');
+      const val = el ? el.value : '';
       state[field] = val;
-      if (field === 'businessName') {
-        const other = document.getElementById('campaignNameInput');
-        if (other && other !== el) other.value = val;
-        const mainInput = document.getElementById('input-businessName');
-        if (mainInput && mainInput !== el) mainInput.value = val;
-      }
       if (maxLen) updateCounter(field, (val || '').length, maxLen);
       updateAllAdPreviews();
       calculateAdStrength();
@@ -667,11 +752,11 @@
             <input type="text" value="${escapeHtml(hl)}" maxlength="30"
               class="w-full text-xs text-gray-800 outline-none pr-1 bg-transparent"
               placeholder="Headline ${idx + 1}"
-              oninput="onHeadlineChange(${idx}, this.value)">
+              oninput="state.headlines[${idx}] = this.value; updateAllAdPreviews(); calculateAdStrength();">
             <span class="text-[10px] font-mono text-gray-400">${hl.length} / 30</span>
           </div>
           ${state.headlines.length > 1 ? `
-            <button onclick="removeHeadline(${idx})" class="p-1 text-gray-400 hover:text-red-500">
+            <button onclick="state.headlines.splice(${idx}, 1); renderHeadlinesList(); updateAllAdPreviews();" class="p-1 text-gray-400 hover:text-red-500">
               <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
             </button>
           ` : ''}
@@ -681,23 +766,9 @@
       lucide.createIcons();
     }
 
-    function onHeadlineChange(idx, val) {
-      state.headlines[idx] = val;
-      renderHeadlinesList();
-      updateAllAdPreviews();
-      calculateAdStrength();
-    }
-
     function addHeadline() {
       if (state.headlines.length >= 15) return;
-      state.headlines.push("New Headline");
-      renderHeadlinesList();
-      updateAllAdPreviews();
-    }
-
-    function removeHeadline(idx) {
-      if (state.headlines.length <= 1) return;
-      state.headlines.splice(idx, 1);
+      state.headlines.push("New Headline Proposition");
       renderHeadlinesList();
       updateAllAdPreviews();
     }
@@ -749,7 +820,7 @@
 
     function addDescription() {
       if (state.descriptions.length >= 4) return;
-      state.descriptions.push("Book directly for verified best prices and flexible booking options today.");
+      state.descriptions.push("Discover why industry experts and active users trust our verified solutions.");
       renderDescriptionsList();
       updateAllAdPreviews();
     }
@@ -759,15 +830,17 @@
       container.innerHTML = '';
       state.sitelinks.forEach((sl, idx) => {
         const div = document.createElement('div');
-        div.className = "p-2 bg-gray-50/80 rounded border border-gray-200 flex items-center justify-between";
+        div.className = "p-2 bg-gray-50/70 rounded border border-gray-200 relative space-y-1";
         div.innerHTML = `
-          <div class="min-w-0 flex-1">
-            <div class="text-xs font-semibold text-gray-800 truncate">${escapeHtml(sl.text)}</div>
-            <div class="text-[10px] text-gray-500 truncate">${escapeHtml(sl.desc1 || '')}</div>
+          <div class="flex items-center justify-between">
+            <span class="font-semibold text-gray-700 text-[10px]">Sitelink #${idx + 1}</span>
+            <button onclick="state.sitelinks.splice(${idx}, 1); renderSitelinksList(); updateAllAdPreviews();" class="text-gray-400 hover:text-red-500">
+              <i data-lucide="trash-2" class="w-3 h-3"></i>
+            </button>
           </div>
-          <button onclick="state.sitelinks.splice(${idx}, 1); renderSitelinksList(); updateAllAdPreviews();" class="text-gray-400 hover:text-red-500 p-1">
-            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-          </button>
+          <input type="text" value="${escapeHtml(sl.text)}" maxlength="25" placeholder="Link text"
+            class="w-full px-2 py-0.5 text-[11px] bg-white border border-gray-300 rounded outline-none"
+            oninput="state.sitelinks[${idx}].text = this.value; updateAllAdPreviews();">
         `;
         container.appendChild(div);
       });
@@ -776,8 +849,39 @@
 
     function addSitelink() {
       if (state.sitelinks.length >= 4) return;
-      state.sitelinks.push({ text: "Special Deals", desc1: "Save up to 30% today" });
+      state.sitelinks.push({ text: "Special Offer", desc1: "Explore exclusive savings", desc2: "Limited availability" });
       renderSitelinksList();
+      updateAllAdPreviews();
+    }
+
+    function applySitelinkPack(packName) {
+      if (!sitelinkPacks[packName]) return;
+      state.sitelinks = JSON.parse(JSON.stringify(sitelinkPacks[packName]));
+      renderSitelinksList();
+      updateAllAdPreviews();
+    }
+
+    function quickInsertSitelink(text, desc1, desc2) {
+      if (state.sitelinks.length >= 4) state.sitelinks[3] = { text, desc1, desc2 };
+      else state.sitelinks.push({ text, desc1, desc2 });
+      renderSitelinksList();
+      updateAllAdPreviews();
+    }
+
+    function autoGenerateSitelinks() {
+      const brand = state.businessName || "Your Brand";
+      state.sitelinks = [
+        { text: `${brand} Deals`, desc1: `Explore exclusive savings`, desc2: "Limited time offer" },
+        { text: "Customer Reviews", desc1: `Rated 4.9/5 by verified clients`, desc2: "Real user stories" },
+        { text: "Contact Team", desc1: "Fast dedicated assistance", desc2: "24/7 client care" },
+        { text: "FAQs & Guide", desc1: `Common questions answered`, desc2: "Browse help docs" }
+      ];
+      renderSitelinksList();
+      updateAllAdPreviews();
+    }
+
+    function toggleSitelinksActive(checked) {
+      state.sitelinksEnabled = checked;
       updateAllAdPreviews();
     }
 
@@ -790,72 +894,53 @@
 
       const circle = document.getElementById('strengthCircle');
       const text = document.getElementById('strengthText');
-      const offset = 59.7 - (Math.min(score, 100) / 100) * 59.7;
+      const offset = 50.2 - (Math.min(score, 100) / 100) * 50.2;
       circle.style.strokeDashoffset = offset;
 
       if (score >= 80) {
         text.textContent = "Excellent";
-        text.className = "text-xs font-bold text-green-700 leading-tight";
+        text.className = "text-[11px] font-bold text-green-700 leading-tight";
         circle.style.stroke = "#1e8e3e";
       } else {
         text.textContent = "Average";
-        text.className = "text-xs font-bold text-yellow-600 leading-tight";
+        text.className = "text-[11px] font-bold text-yellow-600 leading-tight";
         circle.style.stroke = "#f9ab00";
       }
     }
 
     function updateAllAdPreviews() {
-      const bName = state.businessName || "Air New Zealand";
-      const h1 = state.headlines[0] || "Top Rated Brand Solution";
-      const h2 = state.headlines[1] || "Official Site";
-      const h3 = state.headlines[2] || "Shop Online Today";
+      const bName = state.businessName || "Your Brand";
+      const h1 = state.headlines[0] || "Top Rated Solutions";
       const desc = state.descriptions[0] || "Discover exceptional quality and performance built for your lifestyle.";
 
-      document.getElementById('serpBusinessName').textContent = bName;
-      document.getElementById('searchMockQuery').textContent = `${bName.toLowerCase()} solutions online`;
-      document.getElementById('serpDomain').textContent = `https://${state.finalUrl || 'airnz.com'}`;
-      document.getElementById('serpFavicon').src = state.logoImage;
-      document.getElementById('formLogoThumb').src = state.logoImage;
-
-      let p = "";
-      if (state.path1) p += ` › ${escapeHtml(state.path1)}`;
-      if (state.path2) p += ` › ${escapeHtml(state.path2)}`;
-      document.getElementById('serpPathBreadcrumb').innerHTML = p;
-
-      document.getElementById('serpHeadline').textContent = `${h1} | ${h2} | ${h3}`;
-      document.getElementById('serpDescription').textContent = desc;
-
-      // Sitelinks
-      const slContainer = document.getElementById('serpSitelinksContainer');
-      slContainer.innerHTML = '';
-      state.sitelinks.forEach(sl => {
-        const item = document.createElement('div');
-        item.className = "p-2 bg-gray-50 rounded border border-gray-100";
-        item.innerHTML = `
-          <div class="text-xs font-medium text-[#1a0dab] hover:underline">${escapeHtml(sl.text)}</div>
-          <div class="text-[10px] text-gray-500">${escapeHtml(sl.desc1 || '')}</div>
-        `;
-        slContainer.appendChild(item);
-      });
-
-      // Display & YT
+      // Display previews
       document.getElementById('displayHeroImg1').src = state.heroImage;
+      document.getElementById('displayBadgeBrand').textContent = bName;
       document.getElementById('displayNativeTitle').textContent = h1;
-      document.getElementById('displayNativeDesc').textContent = desc;
       document.getElementById('displayNativeCta').textContent = state.cta;
 
-      document.getElementById('ytVideoThumb').src = state.heroImage;
-      document.getElementById('ytMainTitle').textContent = state.longHeadlines[0] || h1;
-      document.getElementById('ytBottomCta').textContent = state.cta;
+      document.getElementById('displayMpuImg').src = state.heroImage;
+      document.getElementById('displayMpuTitle').textContent = h1;
+      document.getElementById('displayMpuBrand').textContent = bName;
+      document.getElementById('displayMpuCta').textContent = state.cta;
 
+      // SERP previews
+      document.getElementById('serpBusinessName').textContent = bName;
+      document.getElementById('searchMockQuery').textContent = `${bName.toLowerCase()} solutions online`;
+      document.getElementById('serpFavicon').src = state.logoImage;
+      document.getElementById('formLogoThumb').src = state.logoImage;
+      document.getElementById('serpHeadline').textContent = state.headlines.slice(0, 3).join(" | ");
+      document.getElementById('serpDescription').textContent = desc;
+
+      // YT & Others
+      document.getElementById('ytVideoThumb').src = state.videoThumbnail || state.heroImage;
       document.getElementById('discoverHeroImg').src = state.heroImage;
       document.getElementById('gmailTeaserLogo').src = state.logoImage;
-      document.getElementById('gmailTeaserSubject').textContent = h1;
     }
 
     function switchChannel(channel) {
       state.activeChannel = channel;
-      ['search', 'display', 'youtube', 'discover', 'gmail'].forEach(ch => {
+      ['search', 'display', 'youtube', 'discover', 'gmail', 'all'].forEach(ch => {
         const view = document.getElementById(`channel-view-${ch}`);
         const tab = document.getElementById(`tab-${ch}`);
         if (ch === channel) {
@@ -924,7 +1009,7 @@
       setTimeout(() => document.getElementById('copyToast').classList.add('hidden'), 2000);
     }
 
-    // Export generated Excel matching the exact requested table structure
+    // Export Excel matching spec table
     function exportToExcelTable() {
       const brandName = state.businessName || "Air New Zealand";
       const finalUrl = state.finalUrl || "";
@@ -965,17 +1050,14 @@
         rows.push([label, "", val, getLen(val)]);
       }
 
-      // URL & Brand identities
       rows.push(["Final URL (required)", "", finalUrl, ""]);
       rows.push(["Display URL", "", displayUrl, ""]);
       rows.push(["Call to action (required)", "", cta, ""]);
       rows.push(["Business name (required)", "", brandName, ""]);
 
-      // Paths
       rows.push(["Display URL Path 1", "Max 15 characters", path1, getLen(path1)]);
       rows.push(["Display URL Path 2", "", path2, getLen(path2)]);
 
-      // Visual Media Specs
       rows.push(["Business logo 1 (required)", "Square logo (1:1)\nRecommended size: 1200 x 1200\nMin. size: 128 x 128 (Add up to 5 logos)", state.logoImage || "", "IMAGES/VIDEOS"]);
       rows.push(["Business logo 2", "Landscape logo (4:1)\nRecommended size: 1200 x 300\nMin. size: 512 x 128 (Add up to 5 logos)", "", ""]);
       rows.push(["Video (required)\nIf you don't have a video, Google will automatically create one in most cases.", "https://support.google.com/google-ads/answer/14528532?sjid=16468493247096824251-AP", "", ""]);
@@ -1029,6 +1111,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       populateForm();
+      switchChannel('display'); // Automatically match screenshot active tab
       if (window.lucide) lucide.createIcons();
     });
   </script>
