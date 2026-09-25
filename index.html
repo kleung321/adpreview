@@ -12,6 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- SheetJS for Excel Generation -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -69,7 +72,7 @@
 </head>
 <body class="bg-[#f0f3f6] text-gray-800 font-sans antialiased h-screen flex flex-col overflow-hidden select-none">
 
-  <!-- TOP HEADER (Exactly like your target layout) -->
+  <!-- TOP HEADER -->
   <header class="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-between z-30 flex-shrink-0">
     <div class="flex items-center gap-3">
       <!-- Google Ads Logo -->
@@ -127,7 +130,7 @@
     <!-- LEFT COLUMN: ASSET BUILDER -->
     <div id="editorPanel" class="w-[480px] flex-shrink-0 bg-white border-r border-gray-200 flex flex-col h-full overflow-hidden transition-all duration-300">
       
-      <!-- SUB-HEADER WITH AD STRENGTH (Exact match) -->
+      <!-- SUB-HEADER WITH AD STRENGTH -->
       <div class="px-4 py-2.5 border-b border-gray-200 bg-white flex items-center justify-between flex-shrink-0">
         <div>
           <h2 class="text-xs font-bold text-gray-800 uppercase tracking-wide flex items-center gap-1.5">
@@ -159,7 +162,7 @@
         <!-- 1. CORE BUSINESS IDENTITY & URLS -->
         <div class="bg-white rounded-xl p-3.5 border border-gray-200 space-y-3 shadow-2xs">
           <div class="pb-1 border-b border-gray-100">
-            <span class="font-bold text-gray-800 uppercase tracking-wider text-[10px] flex items-center gap-1.5 text-blue-800">
+            <span class="font-bold uppercase tracking-wider text-[10px] flex items-center gap-1.5 text-blue-800">
               <i data-lucide="globe" class="w-3.5 h-3.5 text-blue-600"></i> Core Business Identity & URLs
             </span>
           </div>
@@ -342,10 +345,10 @@
       </div>
     </div>
 
-    <!-- RIGHT COLUMN: PREVIEW SESSION (Clean layout) -->
+    <!-- RIGHT COLUMN: PREVIEW SESSION -->
     <div id="previewSessionPanel" class="flex-1 bg-[#f0f3f6] flex flex-col h-full overflow-hidden transition-all duration-300">
       
-      <!-- COMPACT HEADER BAR (Exact layout) -->
+      <!-- COMPACT HEADER BAR -->
       <div class="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between flex-shrink-0 shadow-2xs">
         
         <!-- Channels -->
@@ -397,11 +400,11 @@
         </div>
       </div>
 
-      <!-- Single Viewport Container -->
+      <!-- Viewport Container -->
       <div class="flex-1 overflow-y-auto p-6 flex justify-start items-start custom-scrollbar" id="previewViewport">
         <div id="previewCanvasWrapper" class="w-full max-w-lg transition-all duration-300">
           
-          <!-- SEARCH SERP CARD (Clean, proportional) -->
+          <!-- SEARCH SERP CARD -->
           <div id="channel-view-search" class="space-y-3">
             <div class="text-xs font-medium text-gray-500 flex items-center justify-between px-1">
               <span class="flex items-center gap-1.5"><i data-lucide="search" class="w-3.5 h-3.5 text-blue-500"></i> Google Search SERP Placement</span>
@@ -409,7 +412,7 @@
             </div>
 
             <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm font-sans">
-              <!-- Search query simulation -->
+              <!-- Query bar -->
               <div class="flex items-center gap-2 pb-2.5 mb-2.5 border-b border-gray-100 text-xs text-gray-600">
                 <span class="font-google font-bold text-base text-gray-800 tracking-tight">Google</span>
                 <div class="flex-1 bg-gray-100 rounded-full px-3 py-1.5 text-xs text-gray-600 truncate flex items-center justify-between">
@@ -418,7 +421,7 @@
                 </div>
               </div>
 
-              <!-- Top Favicon & URL Domain -->
+              <!-- Brand Header -->
               <div class="mb-2">
                 <div class="flex items-center justify-between">
                   <div class="flex items-center gap-2 min-w-0">
@@ -438,17 +441,17 @@
                 </div>
               </div>
 
-              <!-- Headline combination -->
+              <!-- Headlines -->
               <h3 class="text-lg leading-snug font-roboto text-[#1a0dab] hover:underline cursor-pointer mb-1.5 font-normal serp-link" id="serpHeadline">
                 Top Rated Brand Solution | Official Site | Shop Online Today
               </h3>
 
-              <!-- SERP Description -->
+              <!-- Description -->
               <p class="text-xs text-[#4d5156] leading-relaxed mb-3" id="serpDescription">
                 Discover exceptional quality and performance built for your lifestyle. Explore full range and unlock free shipping today.
               </p>
 
-              <!-- SERP Sitelinks Grid -->
+              <!-- Sitelinks -->
               <div id="serpSitelinksContainer" class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-100">
                 <div class="p-2 bg-gray-50 rounded border border-gray-100">
                   <div class="text-xs font-medium text-[#1a0dab] hover:underline">Special Deals</div>
@@ -461,14 +464,14 @@
               </div>
             </div>
 
-            <!-- Hint -->
+            <!-- Notice -->
             <div class="bg-blue-50/70 rounded-lg p-2.5 text-xs text-blue-800 border border-blue-100 flex items-start gap-2">
               <i data-lucide="sparkles" class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5"></i>
               <span>Google automatically pairs high-performing headlines and descriptions dynamically based on real-time user query intent.</span>
             </div>
           </div>
 
-          <!-- OTHER CHANNELS (Display, YT, Discover, Gmail) -->
+          <!-- DISPLAY -->
           <div id="channel-view-display" class="hidden space-y-4">
             <div class="bg-white rounded-xl border border-gray-200 overflow-hidden p-3">
               <img id="displayHeroImg1" src="" class="w-full aspect-video object-cover rounded mb-2" alt="Hero">
@@ -478,6 +481,7 @@
             </div>
           </div>
 
+          <!-- YOUTUBE -->
           <div id="channel-view-youtube" class="hidden space-y-4">
             <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
               <div class="relative bg-black aspect-video">
@@ -490,6 +494,7 @@
             </div>
           </div>
 
+          <!-- DISCOVER -->
           <div id="channel-view-discover" class="hidden space-y-4">
             <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 p-4">
               <img id="discoverHeroImg" src="" class="w-full aspect-[1.91/1] object-cover rounded mb-2" alt="Discover">
@@ -498,6 +503,7 @@
             </div>
           </div>
 
+          <!-- GMAIL -->
           <div id="channel-view-gmail" class="hidden space-y-4">
             <div class="bg-white rounded-xl border border-gray-200 p-3 flex items-center gap-2.5">
               <img id="gmailTeaserLogo" src="" class="w-7 h-7 rounded-full object-cover border" alt="Logo">
@@ -522,8 +528,15 @@
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
-      <button onclick="window.print()" class="w-full py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded text-xs font-semibold">Print to PDF</button>
-      <button onclick="copyFormattedMatrix()" class="w-full py-2 px-3 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded text-xs font-medium">Copy Asset Matrix</button>
+      
+      <!-- Excel Generation Button -->
+      <button onclick="exportToExcelTable()" class="w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-xs font-semibold flex items-center justify-center gap-1.5 transition">
+        <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Download PMax Spec Excel (.xlsx)
+      </button>
+
+      <button onclick="window.print()" class="w-full py-2 px-3 bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 rounded text-xs font-medium">Print to PDF</button>
+      <button onclick="copyFormattedMatrix()" class="w-full py-2 px-3 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded text-xs font-medium">Copy Plain Text</button>
+      
       <div id="copyToast" class="hidden p-1.5 text-center text-xs text-emerald-800 bg-emerald-50 rounded border border-emerald-200">Copied!</div>
     </div>
   </div>
@@ -909,6 +922,92 @@
       navigator.clipboard.writeText(doc);
       document.getElementById('copyToast').classList.remove('hidden');
       setTimeout(() => document.getElementById('copyToast').classList.add('hidden'), 2000);
+    }
+
+    // Export generated Excel matching the exact requested table structure
+    function exportToExcelTable() {
+      const brandName = state.businessName || "Air New Zealand";
+      const finalUrl = state.finalUrl || "";
+      const displayUrl = finalUrl.replace(/^https?:\/\//i, '').replace(/^www\./i, '');
+      const cta = state.cta || "Book now";
+      const path1 = state.path1 || "";
+      const path2 = state.path2 || "";
+
+      const rows = [
+        ["", "Remarks", "Ad Copy", "Character Count"]
+      ];
+
+      const getLen = (val) => val ? String(val).length : 0;
+
+      // Headlines 1 - 15
+      for (let i = 1; i <= 15; i++) {
+        const val = state.headlines[i - 1] || "";
+        const isReq = i <= 3;
+        const label = `Headline ${i}` + (isReq ? " (required)" : "");
+        const remark = (i === 1) ? "Max 30 characters" : "";
+        rows.push([label, remark, val, getLen(val)]);
+      }
+
+      // Long Headlines 1 - 5
+      for (let i = 1; i <= 5; i++) {
+        const val = state.longHeadlines[i - 1] || "";
+        const isReq = i === 1;
+        const label = `Long Headline ${i}` + (isReq ? " (required)" : "");
+        const remark = (i === 1) ? "Max 90 characters" : "";
+        rows.push([label, remark, val, getLen(val)]);
+      }
+
+      // Descriptions 1 - 5
+      for (let i = 1; i <= 5; i++) {
+        const val = state.descriptions[i - 1] || "";
+        const isReq = i <= 2;
+        const label = `Description ${i}` + (isReq ? " (required)" : "");
+        rows.push([label, "", val, getLen(val)]);
+      }
+
+      // URL & Brand identities
+      rows.push(["Final URL (required)", "", finalUrl, ""]);
+      rows.push(["Display URL", "", displayUrl, ""]);
+      rows.push(["Call to action (required)", "", cta, ""]);
+      rows.push(["Business name (required)", "", brandName, ""]);
+
+      // Paths
+      rows.push(["Display URL Path 1", "Max 15 characters", path1, getLen(path1)]);
+      rows.push(["Display URL Path 2", "", path2, getLen(path2)]);
+
+      // Visual Media Specs
+      rows.push(["Business logo 1 (required)", "Square logo (1:1)\nRecommended size: 1200 x 1200\nMin. size: 128 x 128 (Add up to 5 logos)", state.logoImage || "", "IMAGES/VIDEOS"]);
+      rows.push(["Business logo 2", "Landscape logo (4:1)\nRecommended size: 1200 x 300\nMin. size: 512 x 128 (Add up to 5 logos)", "", ""]);
+      rows.push(["Video (required)\nIf you don't have a video, Google will automatically create one in most cases.", "https://support.google.com/google-ads/answer/14528532?sjid=16468493247096824251-AP", "", ""]);
+      rows.push(["Landscape image (1.91:1) (required)", "Recommended size: 1200 x 628 (Add up to 20 images)", state.heroImage || "", ""]);
+      rows.push(["Square image (1:1) (required)", "Recommended size: 1200 x 1200 (Add up to 20 images)", "", ""]);
+      rows.push(["Portrait image (4:5)", "Recommended size: 960 x 1200 (Add up to 20 images)", "", ""]);
+
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+
+      ws['!cols'] = [
+        { wch: 32 },
+        { wch: 35 },
+        { wch: 45 },
+        { wch: 18 }
+      ];
+
+      ws['!merges'] = [
+        { s: { r: 1, c: 1 }, e: { r: 15, c: 1 } },
+        { s: { r: 16, c: 1 }, e: { r: 25, c: 1 } },
+        { s: { r: 31, c: 1 }, e: { r: 32, c: 1 } },
+        { s: { r: 27, c: 1 }, e: { r: 30, c: 1 } },
+        { s: { r: 27, c: 3 }, e: { r: 30, c: 3 } },
+        { s: { r: 33, c: 3 }, e: { r: 38, c: 3 } }
+      ];
+
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "PMax Matrix");
+      
+      const safeName = brandName.replace(/[^a-z0-9_-]/gi, '_');
+      XLSX.writeFile(wb, `${safeName}_PMax_Asset_Matrix.xlsx`);
+      
+      closeExportModal();
     }
 
     function handleFileUpload(event, key) {
