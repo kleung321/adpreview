@@ -268,27 +268,27 @@
           </div>
         </div>
 
-        <!-- 3. Sitelinks Extensions (Client Fully Editable, Min 2 Required) -->
+        <!-- 3. Sitelinks Extensions (Matching exact highlighted card layout) -->
         <div class="bg-white rounded-lg p-3 border border-gray-200 space-y-2.5 shadow-2xs">
           <div class="flex items-center justify-between pb-1 border-b border-gray-100">
             <div>
               <span class="font-bold text-gray-800 uppercase tracking-wider text-[10px] flex items-center gap-1">
-                <i data-lucide="link-2" class="w-3.5 h-3.5 text-blue-600"></i> Sitelinks Extensions (Min 2, Max 4)
+                <i data-lucide="link-2" class="w-3.5 h-3.5 text-blue-600"></i> Sitelinks Extensions (Up to 4)
               </span>
-              <p class="text-[9px] text-gray-400">Google Policy: Min 2 sitelinks required to be eligible to show.</p>
+              <p class="text-[9px] text-gray-400">Pick 1-click industry packs or tap chips below without manual typing</p>
             </div>
             <div class="flex items-center gap-1.5">
               <label class="flex items-center gap-1 text-[10px] font-medium text-gray-700 cursor-pointer select-none bg-gray-50 px-1.5 py-0.5 rounded border border-gray-200">
                 <input type="checkbox" id="toggle-sitelinks-active" checked onchange="toggleSitelinksActive(this.checked)" class="rounded text-blue-600 w-3 h-3">
                 <span>Show in Ad</span>
               </label>
-              <button onclick="addSitelink()" id="btnAddSitelink" class="text-[11px] font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-0.5">
+              <button onclick="addSitelink()" class="text-[11px] font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-0.5">
                 <i data-lucide="plus" class="w-3 h-3"></i> Add
               </button>
             </div>
           </div>
 
-          <!-- 1-Click Sitelink Preset Packs -->
+          <!-- 1-Click Sitelink Preset Packs (The 4 Clean Boxes) -->
           <div class="space-y-1.5">
             <div class="flex items-center justify-between">
               <span class="text-[9px] font-bold uppercase tracking-wider text-gray-500 flex items-center gap-1">
@@ -338,8 +338,8 @@
             </div>
           </div>
 
-          <!-- Sitelinks List Injected (With Full Editable Fields: Text, Desc1, Desc2, Final URL) -->
-          <div id="sitelinksContainer" class="space-y-2 pt-1 border-t border-gray-100"></div>
+          <!-- Sitelinks List Injected -->
+          <div id="sitelinksContainer" class="space-y-1.5 pt-1 border-t border-gray-100"></div>
         </div>
 
         <!-- 4. Headlines -->
@@ -402,13 +402,13 @@
       </div>
     </div>
 
-    <!-- RIGHT COLUMN: PREVIEW SESSION -->
+    <!-- RIGHT COLUMN: PREVIEW SESSION (Clean & Proportional Spacing) -->
     <div id="previewSessionPanel" class="flex-1 bg-[#f0f3f6] flex flex-col h-full overflow-hidden transition-all duration-300">
       
       <!-- Preview Navigation Bar -->
       <div class="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between flex-shrink-0 shadow-2xs">
         
-        <!-- Channels -->
+        <!-- Channels (Exactly matching screenshot) -->
         <div class="flex items-center space-x-1" id="channelTabNav">
           <button onclick="switchChannel('search')" id="tab-search" class="channel-tab-btn flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium text-gray-600 hover:bg-gray-100">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24"><path fill="#4285F4" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-1 14.5v-9l6 4.5z"/></svg>
@@ -461,11 +461,11 @@
         </div>
       </div>
 
-      <!-- Viewport Canvas -->
+      <!-- Viewport Canvas (Prettier Spacing) -->
       <div class="flex-1 overflow-y-auto p-6 md:p-8 flex justify-center items-start custom-scrollbar" id="previewViewport">
         <div id="previewCanvasWrapper" class="w-full max-w-lg transition-all duration-300">
           
-          <!-- 1. DISPLAY VIEW -->
+          <!-- 1. DISPLAY VIEW (Matches screenshot exactly: Feed Card + 300x250 below) -->
           <div id="channel-view-display" class="space-y-6">
             <div class="text-xs font-medium text-gray-500 flex items-center justify-between px-1">
               <span class="flex items-center gap-1.5"><i data-lucide="layout-grid" class="w-3.5 h-3.5 text-green-500"></i> Google Display Network (GDN) Responsive Formats</span>
@@ -496,7 +496,7 @@
               </div>
             </div>
 
-            <!-- Standard Rectangle (300 x 250) -->
+            <!-- Standard Rectangle (300 x 250) Centered -->
             <div class="flex flex-col items-center pt-2">
               <div class="text-[10px] text-gray-400 mb-1.5">Standard Rectangle (300 x 250)</div>
               <div class="w-[300px] h-[250px] bg-white border border-gray-300 rounded-lg shadow-sm relative flex flex-col justify-between p-3 overflow-hidden">
@@ -563,7 +563,6 @@
                 Discover exceptional quality and performance built for your lifestyle. Explore full range and unlock free shipping today.
               </p>
 
-              <!-- Dynamic Interactive Sitelinks Grid -->
               <div id="serpSitelinksContainer" class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-100"></div>
             </div>
           </div>
@@ -646,28 +645,28 @@
   <script>
     const sitelinkPacks = {
       ecommerce: [
-        { text: "Shop Best Sellers", desc1: "Top rated favorites", desc2: "Free shipping available", url: "https://www.airnewzealand.com/best-sellers" },
-        { text: "Special Deals", desc1: "Save up to 40% today", desc2: "Limited-time flash sale", url: "https://www.airnewzealand.com/deals" },
-        { text: "Customer Reviews", desc1: "Over 15,000+ ratings", desc2: "Verified feedback", url: "https://www.airnewzealand.com/reviews" },
-        { text: "Track Order", desc1: "Live delivery updates", desc2: "Hassle-free returns", url: "https://www.airnewzealand.com/tracking" }
+        { text: "Shop Best Sellers", desc1: "Top rated favorites", desc2: "Free shipping available" },
+        { text: "Special Deals", desc1: "Save up to 40% today", desc2: "Limited-time flash sale" },
+        { text: "Customer Reviews", desc1: "Over 15,000+ ratings", desc2: "Verified feedback" },
+        { text: "Track Order", desc1: "Live delivery updates", desc2: "Hassle-free returns" }
       ],
       leadgen: [
-        { text: "Get a Free Quote", desc1: "Tailored to your needs", desc2: "Fast 24-hr turnaround", url: "https://www.airnewzealand.com/quote" },
-        { text: "Our Services", desc1: "Enterprise level plans", desc2: "Certified expertise", url: "https://www.airnewzealand.com/services" },
-        { text: "Case Studies", desc1: "Verified client results", desc2: "Proven ROI growth", url: "https://www.airnewzealand.com/cases" },
-        { text: "Contact Experts", desc1: "Speak with an advisor", desc2: "Free consultation", url: "https://www.airnewzealand.com/contact" }
+        { text: "Get a Free Quote", desc1: "Tailored to your needs", desc2: "Fast 24-hr turnaround" },
+        { text: "Our Services", desc1: "Enterprise level plans", desc2: "Certified expertise" },
+        { text: "Case Studies", desc1: "Verified client results", desc2: "Proven ROI growth" },
+        { text: "Contact Experts", desc1: "Speak with an advisor", desc2: "Free consultation" }
       ],
       booking: [
-        { text: "Book Online Now", desc1: "Instant confirmation", desc2: "Choose date & time", url: "https://www.airnewzealand.com/book" },
-        { text: "Locations & Hours", desc1: "Find nearest branch", desc2: "Open 7 days a week", url: "https://www.airnewzealand.com/locations" },
-        { text: "Pricing & Plans", desc1: "Transparent rates", desc2: "No hidden fees", url: "https://www.airnewzealand.com/pricing" },
-        { text: "Meet Our Team", desc1: "Certified specialists", desc2: "Trusted experience", url: "https://www.airnewzealand.com/team" }
+        { text: "Book Online Now", desc1: "Instant confirmation", desc2: "Choose date & time" },
+        { text: "Locations & Hours", desc1: "Find nearest branch", desc2: "Open 7 days a week" },
+        { text: "Pricing & Plans", desc1: "Transparent rates", desc2: "No hidden fees" },
+        { text: "Meet Our Team", desc1: "Certified specialists", desc2: "Trusted experience" }
       ],
       saas: [
-        { text: "Start Free Trial", desc1: "14 days full access", desc2: "No card required", url: "https://www.airnewzealand.com/trial" },
-        { text: "Transparent Pricing", desc1: "Scale with your team", desc2: "Monthly or annual", url: "https://www.airnewzealand.com/pricing" },
-        { text: "Product Features", desc1: "Explore full toolkit", desc2: "Integrates with 100+ tools", url: "https://www.airnewzealand.com/features" },
-        { text: "Schedule a Demo", desc1: "Live walkthrough", desc2: "Tailored to workflow", url: "https://www.airnewzealand.com/demo" }
+        { text: "Start Free Trial", desc1: "14 days full access", desc2: "No card required" },
+        { text: "Transparent Pricing", desc1: "Scale with your team", desc2: "Monthly or annual" },
+        { text: "Product Features", desc1: "Explore full toolkit", desc2: "Integrates with 100+ tools" },
+        { text: "Schedule a Demo", desc1: "Live walkthrough", desc2: "Tailored to workflow" }
       ]
     };
 
@@ -693,13 +692,12 @@
       heroImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
       logoImage: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?auto=format&fit=crop&w=150&q=80",
       videoThumbnail: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
-      // Policy requirement: At least 2 sitelinks
       sitelinks: [
-        { text: "Customer Reviews", desc1: "Over 10,000+ ratings", desc2: "Rated 4.9 stars", url: "https://www.airnewzealand.com/reviews" },
-        { text: "Special Deals", desc1: "Save up to 30% today", desc2: "Limited time pricing", url: "https://www.airnewzealand.com/deals" }
+        { text: "Customer Reviews", desc1: "Over 10,000+ ratings", desc2: "Rated 4.9 stars" },
+        { text: "Special Deals", desc1: "Save up to 30% today", desc2: "Limited time pricing" }
       ],
       sitelinksEnabled: true,
-      activeChannel: 'display',
+      activeChannel: 'display', // Set default to display as shown in the screenshot
       device: 'mobile',
       isPresentationMode: false
     };
@@ -827,101 +825,31 @@
       updateAllAdPreviews();
     }
 
-    // Fully Editable Sitelinks (Ensures at least 2 sitelinks, Max 4)
     function renderSitelinksList() {
       const container = document.getElementById('sitelinksContainer');
       container.innerHTML = '';
-      
-      const btnAdd = document.getElementById('btnAddSitelink');
-      if (btnAdd) {
-        btnAdd.style.display = state.sitelinks.length >= 4 ? 'none' : 'flex';
-      }
-
       state.sitelinks.forEach((sl, idx) => {
-        const canDelete = state.sitelinks.length > 2; // Enforce minimum 2 sitelinks
         const div = document.createElement('div');
-        div.className = "p-2.5 bg-gray-50/70 rounded-lg border border-gray-200 relative space-y-2";
+        div.className = "p-2 bg-gray-50/70 rounded border border-gray-200 relative space-y-1";
         div.innerHTML = `
           <div class="flex items-center justify-between">
-            <span class="font-bold text-gray-700 text-[10px] flex items-center gap-1">
-              <span class="w-3.5 h-3.5 rounded-full bg-blue-100 text-blue-700 text-[9px] flex items-center justify-center font-bold">${idx + 1}</span>
-              Sitelink #${idx + 1} ${idx < 2 ? '<span class="text-red-500 font-normal text-[9px]">*Required</span>' : ''}
-            </span>
-            ${canDelete ? `
-              <button onclick="removeSitelink(${idx})" title="Remove sitelink" class="text-gray-400 hover:text-red-500 p-0.5 transition">
-                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-              </button>
-            ` : '<span class="text-[9px] text-gray-400 italic">Min 2 required</span>'}
+            <span class="font-semibold text-gray-700 text-[10px]">Sitelink #${idx + 1}</span>
+            <button onclick="state.sitelinks.splice(${idx}, 1); renderSitelinksList(); updateAllAdPreviews();" class="text-gray-400 hover:text-red-500">
+              <i data-lucide="trash-2" class="w-3 h-3"></i>
+            </button>
           </div>
-
-          <!-- Link Text -->
-          <div>
-            <div class="flex justify-between items-center mb-0.5">
-              <label class="text-[9px] font-medium text-gray-600">Link Text (Max 25)</label>
-              <span class="font-mono text-[9px] ${sl.text.length > 25 ? 'text-red-600 font-bold' : 'text-gray-400'}">${sl.text.length} / 25</span>
-            </div>
-            <input type="text" value="${escapeHtml(sl.text)}" maxlength="25" placeholder="e.g. Special Deals"
-              class="w-full px-2 py-1 text-xs bg-white border border-gray-300 rounded outline-none focus:border-blue-500"
-              oninput="updateSitelinkField(${idx}, 'text', this.value)">
-          </div>
-
-          <!-- Descriptions (Line 1 & Line 2) -->
-          <div class="grid grid-cols-2 gap-1.5">
-            <div>
-              <div class="flex justify-between items-center mb-0.5">
-                <label class="text-[9px] font-medium text-gray-600">Desc Line 1 (Max 35)</label>
-                <span class="font-mono text-[9px] ${((sl.desc1 || '').length > 35) ? 'text-red-600 font-bold' : 'text-gray-400'}">${(sl.desc1 || '').length} / 35</span>
-              </div>
-              <input type="text" value="${escapeHtml(sl.desc1 || '')}" maxlength="35" placeholder="Desc line 1"
-                class="w-full px-2 py-0.5 text-[11px] bg-white border border-gray-300 rounded outline-none focus:border-blue-500"
-                oninput="updateSitelinkField(${idx}, 'desc1', this.value)">
-            </div>
-            <div>
-              <div class="flex justify-between items-center mb-0.5">
-                <label class="text-[9px] font-medium text-gray-600">Desc Line 2 (Max 35)</label>
-                <span class="font-mono text-[9px] ${((sl.desc2 || '').length > 35) ? 'text-red-600 font-bold' : 'text-gray-400'}">${(sl.desc2 || '').length} / 35</span>
-              </div>
-              <input type="text" value="${escapeHtml(sl.desc2 || '')}" maxlength="35" placeholder="Desc line 2"
-                class="w-full px-2 py-0.5 text-[11px] bg-white border border-gray-300 rounded outline-none focus:border-blue-500"
-                oninput="updateSitelinkField(${idx}, 'desc2', this.value)">
-            </div>
-          </div>
-
-          <!-- Final URL -->
-          <div>
-            <label class="text-[9px] font-medium text-gray-600 block mb-0.5">Final Landing Page URL</label>
-            <input type="url" value="${escapeHtml(sl.url || '')}" placeholder="https://yourbrand.com/page"
-              class="w-full px-2 py-0.5 text-[11px] bg-white border border-gray-300 rounded outline-none focus:border-blue-500"
-              oninput="updateSitelinkField(${idx}, 'url', this.value)">
-          </div>
+          <input type="text" value="${escapeHtml(sl.text)}" maxlength="25" placeholder="Link text"
+            class="w-full px-2 py-0.5 text-[11px] bg-white border border-gray-300 rounded outline-none"
+            oninput="state.sitelinks[${idx}].text = this.value; updateAllAdPreviews();">
         `;
         container.appendChild(div);
       });
       lucide.createIcons();
     }
 
-    function updateSitelinkField(idx, field, val) {
-      if (!state.sitelinks[idx]) return;
-      state.sitelinks[idx][field] = val;
-      updateAllAdPreviews();
-    }
-
     function addSitelink() {
       if (state.sitelinks.length >= 4) return;
-      const baseDomain = state.finalUrl || "https://www.yourbrand.com";
-      state.sitelinks.push({
-        text: `Special Offer ${state.sitelinks.length + 1}`,
-        desc1: "Explore exclusive savings",
-        desc2: "Limited time availability",
-        url: `${baseDomain}/offer-${state.sitelinks.length + 1}`
-      });
-      renderSitelinksList();
-      updateAllAdPreviews();
-    }
-
-    function removeSitelink(idx) {
-      if (state.sitelinks.length <= 2) return; // Prevent deleting below minimum 2
-      state.sitelinks.splice(idx, 1);
+      state.sitelinks.push({ text: "Special Offer", desc1: "Explore exclusive savings", desc2: "Limited availability" });
       renderSitelinksList();
       updateAllAdPreviews();
     }
@@ -934,27 +862,19 @@
     }
 
     function quickInsertSitelink(text, desc1, desc2) {
-      const baseDomain = state.finalUrl || "https://www.yourbrand.com";
-      const slug = text.toLowerCase().replace(/[^a-z0-9]/g, '-');
-      const item = { text, desc1, desc2, url: `${baseDomain}/${slug}` };
-
-      if (state.sitelinks.length >= 4) {
-        state.sitelinks[state.sitelinks.length - 1] = item;
-      } else {
-        state.sitelinks.push(item);
-      }
+      if (state.sitelinks.length >= 4) state.sitelinks[3] = { text, desc1, desc2 };
+      else state.sitelinks.push({ text, desc1, desc2 });
       renderSitelinksList();
       updateAllAdPreviews();
     }
 
     function autoGenerateSitelinks() {
       const brand = state.businessName || "Your Brand";
-      const baseDomain = state.finalUrl || "https://www.yourbrand.com";
       state.sitelinks = [
-        { text: `${brand} Deals`, desc1: `Explore exclusive savings`, desc2: "Limited time offer", url: `${baseDomain}/deals` },
-        { text: "Customer Reviews", desc1: `Rated 4.9/5 by verified clients`, desc2: "Real user stories", url: `${baseDomain}/reviews` },
-        { text: "Contact Team", desc1: "Fast dedicated assistance", desc2: "24/7 client care", url: `${baseDomain}/contact` },
-        { text: "FAQs & Guide", desc1: `Common questions answered`, desc2: "Browse help docs", url: `${baseDomain}/faqs` }
+        { text: `${brand} Deals`, desc1: `Explore exclusive savings`, desc2: "Limited time offer" },
+        { text: "Customer Reviews", desc1: `Rated 4.9/5 by verified clients`, desc2: "Real user stories" },
+        { text: "Contact Team", desc1: "Fast dedicated assistance", desc2: "24/7 client care" },
+        { text: "FAQs & Guide", desc1: `Common questions answered`, desc2: "Browse help docs" }
       ];
       renderSitelinksList();
       updateAllAdPreviews();
@@ -1011,24 +931,6 @@
       document.getElementById('formLogoThumb').src = state.logoImage;
       document.getElementById('serpHeadline').textContent = state.headlines.slice(0, 3).join(" | ");
       document.getElementById('serpDescription').textContent = desc;
-
-      // SERP Sitelinks Previews
-      const serpSlContainer = document.getElementById('serpSitelinksContainer');
-      serpSlContainer.innerHTML = '';
-      if (state.sitelinksEnabled && state.sitelinks.length > 0) {
-        serpSlContainer.style.display = 'grid';
-        state.sitelinks.forEach(sl => {
-          const div = document.createElement('div');
-          div.className = "p-2 bg-gray-50 hover:bg-gray-100 rounded border border-gray-100 transition cursor-pointer";
-          div.innerHTML = `
-            <div class="text-xs font-medium text-[#1a0dab] hover:underline truncate">${escapeHtml(sl.text)}</div>
-            <div class="text-[10px] text-gray-500 line-clamp-1">${escapeHtml(sl.desc1 || '')}</div>
-          `;
-          serpSlContainer.appendChild(div);
-        });
-      } else {
-        serpSlContainer.style.display = 'none';
-      }
 
       // YT & Others
       document.getElementById('ytVideoThumb').src = state.videoThumbnail || state.heroImage;
@@ -1089,14 +991,10 @@
       state.finalUrl = "";
       state.path1 = "";
       state.path2 = "";
-      state.headlines = ["", "", ""];
+      state.headlines = [""];
       state.longHeadlines = [""];
-      state.descriptions = ["", ""];
-      // Keep exactly 2 empty sitelinks to satisfy policy
-      state.sitelinks = [
-        { text: "", desc1: "", desc2: "", url: "" },
-        { text: "", desc1: "", desc2: "", url: "" }
-      ];
+      state.descriptions = [""];
+      state.sitelinks = [];
       populateForm();
     }
 
@@ -1105,17 +1003,13 @@
 
     function copyFormattedMatrix() {
       let doc = `PMAX ASSET MATRIX: ${state.businessName}\n`;
-      doc += `Headlines: \n` + state.headlines.join('\n') + `\n\n`;
-      doc += `Sitelinks (Min 2 required):\n`;
-      state.sitelinks.forEach((s, i) => {
-        doc += `${i + 1}. [${s.text}] ${s.desc1} | ${s.desc2} -> ${s.url}\n`;
-      });
+      doc += `Headlines: \n` + state.headlines.join('\n');
       navigator.clipboard.writeText(doc);
       document.getElementById('copyToast').classList.remove('hidden');
       setTimeout(() => document.getElementById('copyToast').classList.add('hidden'), 2000);
     }
 
-    // Export Excel matching spec table, including Sitelinks (min 2, max 4)
+    // Export Excel matching spec table
     function exportToExcelTable() {
       const brandName = state.businessName || "Air New Zealand";
       const finalUrl = state.finalUrl || "";
@@ -1156,32 +1050,14 @@
         rows.push([label, "", val, getLen(val)]);
       }
 
-      // URL & Brand identities
       rows.push(["Final URL (required)", "", finalUrl, ""]);
       rows.push(["Display URL", "", displayUrl, ""]);
       rows.push(["Call to action (required)", "", cta, ""]);
       rows.push(["Business name (required)", "", brandName, ""]);
 
-      // Paths
       rows.push(["Display URL Path 1", "Max 15 characters", path1, getLen(path1)]);
       rows.push(["Display URL Path 2", "", path2, getLen(path2)]);
 
-      // Sitelinks Extensions Section (Min 2 required as per Google policy)
-      const slMerges = [];
-      for (let i = 1; i <= 4; i++) {
-        const sl = state.sitelinks[i - 1] || { text: "", desc1: "", desc2: "", url: "" };
-        const isReq = i <= 2;
-        const reqTag = isReq ? " (required - min 2)" : " (optional)";
-        
-        const startRow = rows.length;
-        rows.push([`Sitelink ${i} Link Text${reqTag}`, "Max 25 characters", sl.text, getLen(sl.text)]);
-        rows.push([`Sitelink ${i} Description Line 1`, "Max 35 characters", sl.desc1 || "", getLen(sl.desc1)]);
-        rows.push([`Sitelink ${i} Description Line 2`, "Max 35 characters", sl.desc2 || "", getLen(sl.desc2)]);
-        rows.push([`Sitelink ${i} Final URL`, "Valid destination URL", sl.url || "", ""]);
-      }
-
-      // Visual Media Specs
-      const mediaStartRow = rows.length;
       rows.push(["Business logo 1 (required)", "Square logo (1:1)\nRecommended size: 1200 x 1200\nMin. size: 128 x 128 (Add up to 5 logos)", state.logoImage || "", "IMAGES/VIDEOS"]);
       rows.push(["Business logo 2", "Landscape logo (4:1)\nRecommended size: 1200 x 300\nMin. size: 512 x 128 (Add up to 5 logos)", "", ""]);
       rows.push(["Video (required)\nIf you don't have a video, Google will automatically create one in most cases.", "https://support.google.com/google-ads/answer/14528532?sjid=16468493247096824251-AP", "", ""]);
@@ -1192,8 +1068,8 @@
       const ws = XLSX.utils.aoa_to_sheet(rows);
 
       ws['!cols'] = [
-        { wch: 34 },
-        { wch: 36 },
+        { wch: 32 },
+        { wch: 35 },
         { wch: 45 },
         { wch: 18 }
       ];
@@ -1204,7 +1080,7 @@
         { s: { r: 31, c: 1 }, e: { r: 32, c: 1 } },
         { s: { r: 27, c: 1 }, e: { r: 30, c: 1 } },
         { s: { r: 27, c: 3 }, e: { r: 30, c: 3 } },
-        { s: { r: mediaStartRow, c: 3 }, e: { r: mediaStartRow + 5, c: 3 } }
+        { s: { r: 33, c: 3 }, e: { r: 38, c: 3 } }
       ];
 
       const wb = XLSX.utils.book_new();
@@ -1235,7 +1111,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       populateForm();
-      switchChannel('display');
+      switchChannel('display'); // Automatically match screenshot active tab
       if (window.lucide) lucide.createIcons();
     });
   </script>
